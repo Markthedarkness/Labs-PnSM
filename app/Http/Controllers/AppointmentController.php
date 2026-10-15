@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 
-class ServiceController extends Controller
+class AppointmentController extends Controller
 {
     public function index()
     {
@@ -38,16 +38,16 @@ class ServiceController extends Controller
         $pageTitle = 'Наші послуги';
         $clinicPhone = '+38 (044) 123-45-67';
 
-        return view('service.index', compact('services', 'pageTitle', 'clinicPhone'));
+        return view('appointment.index', compact('services', 'pageTitle', 'clinicPhone'));
     }
 
     public function contact()
     {
-        return view('service.contact');
+        return view('appointment.contact');
     }
 
     public function contactStore(ContactRequest $request)
     {
-        return view('service.contact-confirm', $request->validated());
+        return view('appointment.contact-confirm', $request->validated());
     }
 }

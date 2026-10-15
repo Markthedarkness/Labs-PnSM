@@ -7,17 +7,18 @@
 
     <p>
         Дякуємо за звернення! Наш адміністратор зв'яжеться з вами
-        найближчим часом.
+        найближчим часом для підтвердження запису.
     </p>
 
-    <h2>Ваші дані</h2>
+    <h2>Деталі запису</h2>
     <ul>
         <li><strong>Ім'я:</strong> {{ $name }}</li>
         <li><strong>Email:</strong> {{ $email }}</li>
-        <li><strong>Повідомлення:</strong> {{ $message }}</li>
+        <li><strong>Лікар:</strong> {{ $doctor }}</li>
+        <li><strong>Бажана дата прийому:</strong> {{ $appointment_date }}</li>
     </ul>
 
     <p>
-        <a href="{{ route('service.index') }}">← Повернутися до послуг</a>
+        <a href="{{ route('appointment.index') }}">← Повернутися до послуг</a>
     </p>
 @endsection

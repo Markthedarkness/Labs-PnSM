@@ -189,7 +189,7 @@
     </div>
     <nav>
         <a href="{{ route('site.say', ['message' => 'Вітаю']) }}">Говоримо привіт</a>
-        <a href="{{ route('service.index') }}">Послуги</a>
+        <a href="{{ route('appointment.index') }}">Послуги</a>
         <a href="{{ route('entry.form') }}">Форма</a>
         <a href="{{ route('site.about') }}">Про систему</a>
         <a href="{{ route('site.contact') }}">Контакти</a>

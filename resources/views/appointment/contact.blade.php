@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('service.contact.store') }}" class="contact-form">
+    <form method="POST" action="{{ route('appointment.contact.store') }}" class="contact-form">
         @csrf
 
         <div class="form-group">
@@ -53,14 +53,42 @@
         </div>
 
         <div class="form-group">
-            <label for="message">Повідомлення</label>
-            <textarea
-                id="message"
-                name="message"
-                rows="6"
-                placeholder="Опишіть, на яку послугу ви хочете записатися та зручний час..."
-            >{{ old('message') }}</textarea>
-            @error('message')
+            <label for="doctor">Оберіть лікаря</label>
+            <select id="doctor" name="doctor">
+                <option value="" disabled {{ old('doctor') ? '' : 'selected' }}>
+                    — Оберіть зі списку —
+                </option>
+                <option value="Терапевт" {{ old('doctor') === 'Терапевт' ? 'selected' : '' }}>
+                    Терапевт
+                </option>
+                <option value="Кардіолог" {{ old('doctor') === 'Кардіолог' ? 'selected' : '' }}>
+                    Кардіолог
+                </option>
+                <option value="Невролог" {{ old('doctor') === 'Невролог' ? 'selected' : '' }}>
+                    Невролог
+                </option>
+                <option value="Педіатр" {{ old('doctor') === 'Педіатр' ? 'selected' : '' }}>
+                    Педіатр
+                </option>
+                <option value="Дерматолог" {{ old('doctor') === 'Дерматолог' ? 'selected' : '' }}>
+                    Дерматолог
+                </option>
+            </select>
+            @error('doctor')
+            <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="appointment_date">Бажана дата прийому</label>
+            <input
+                type="date"
+                id="appointment_date"
+                name="appointment_date"
+                value="{{ old('appointment_date') }}"
+                min="{{ date('Y-m-d') }}"
+            >
+            @error('appointment_date')
             <p class="error">{{ $message }}</p>
             @enderror
         </div>
@@ -78,16 +106,17 @@
             margin-bottom: 6px;
         }
         .form-group input,
-        .form-group textarea {
+        .form-group select {
             width: 100%;
             padding: 10px 12px;
             border: 1px solid #c9d9e6;
             border-radius: 6px;
             font-size: 14px;
             font-family: inherit;
+            background-color: #ffffff;
         }
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group select:focus {
             outline: none;
             border-color: #1488d8;
             box-shadow: 0 0 0 3px rgba(20, 136, 216, 0.15);
