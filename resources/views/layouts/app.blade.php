@@ -188,11 +188,11 @@
         MedCare
     </div>
     <nav>
-        <a href="{{ url('/') }}">Головна</a>
-        <a href="{{ url('/patients') }}">Пацієнти</a>
-        <a href="{{ url('/doctors') }}">Лікарі</a>
-        <a href="{{ url('/appointments') }}">Записи</a>
-        <a href="{{ url('/about') }}">Про систему</a>
+        <a href="{{ route('site.say', ['message' => 'Вітаю']) }}">Говоримо привіт</a>
+        <a href="{{ route('service.index') }}">Послуги</a>
+        <a href="{{ route('entry.form') }}">Форма</a>
+        <a href="{{ route('site.about') }}">Про систему</a>
+        <a href="{{ route('site.contact') }}">Контакти</a>
     </nav>
 </header>
 
