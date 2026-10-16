@@ -22,3 +22,6 @@ Route::post('/appointments/contact', [AppointmentController::class, 'contactStor
 use App\Http\Controllers\CountryController;
 
 Route::resource('country', CountryController::class);
+use App\Http\Controllers\PatientController;
+
+Route::resource('patient', PatientController::class);

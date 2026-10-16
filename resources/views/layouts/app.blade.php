@@ -343,6 +343,7 @@
         <a href="{{ route('site.about') }}">Про систему</a>
         <a href="{{ route('site.contact') }}">Контакти</a>
         <a href="{{ route('country.index') }}">Країни</a>
+        <a href="{{ route('patient.index') }}">Пацієнти</a>
     </nav>
 </header>
 
