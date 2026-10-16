@@ -178,6 +178,155 @@
             font-size: 13px;
             color: #8fb8d4;
         }
+        /* ===== Пагінація ===== */
+        nav[role="navigation"] {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav[role="navigation"] > div:first-child {
+            display: none; /* Ховаємо "Showing X to Y of Z results" */
+        }
+
+        nav[role="navigation"] > div:last-child {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        nav[role="navigation"] a,
+        nav[role="navigation"] span[aria-current="page"] > span,
+        nav[role="navigation"] span[aria-disabled="true"] > span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border: 1px solid #c9d9e6;
+            border-radius: 6px;
+            background-color: #ffffff;
+            color: #0b6fb8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        nav[role="navigation"] a:hover {
+            background-color: #e8f3fb;
+            border-color: #1488d8;
+        }
+
+        nav[role="navigation"] span[aria-current="page"] > span {
+            background-color: #0b6fb8;
+            color: #ffffff;
+            border-color: #0b6fb8;
+            font-weight: 600;
+        }
+
+        nav[role="navigation"] span[aria-disabled="true"] > span {
+            background-color: #f4f6f8;
+            color: #a8b8c6;
+            border-color: #e1eef8;
+            cursor: not-allowed;
+        }
+
+        nav[role="navigation"] svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* ===== Таблиця ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        table thead th {
+            text-align: left;
+            padding: 10px 12px;
+            background-color: #f4f9fd;
+            color: #0b3a5e;
+            font-weight: 600;
+            border-bottom: 2px solid #d7e6f2;
+        }
+
+        table tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8f0f7;
+            color: #35485c;
+        }
+
+        table tbody tr:hover {
+            background-color: #f8fbfe;
+        }
+
+        table a {
+            color: #0b6fb8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Форма ===== */
+        form div {
+            margin-bottom: 16px;
+        }
+
+        form label {
+            display: block;
+            font-weight: 600;
+            color: #1f2d3d;
+            margin-bottom: 6px;
+        }
+
+        form input[type="text"],
+        form input[type="number"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 9px 12px;
+            border: 1px solid #c9d9e6;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #1488d8;
+            box-shadow: 0 0 0 3px rgba(20, 136, 216, 0.15);
+        }
+
+        form button[type="submit"] {
+            background-color: #0b6fb8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #1488d8;
+        }
+
+        .error {
+            color: #c0392b;
+            font-size: 13px;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -193,6 +342,8 @@
         <a href="{{ route('entry.form') }}">Форма</a>
         <a href="{{ route('site.about') }}">Про систему</a>
         <a href="{{ route('site.contact') }}">Контакти</a>
+        <a href="{{ route('country.index') }}">Країни</a>
+        <a href="{{ route('patient.index') }}">Пацієнти</a>
     </nav>
 </header>
 
