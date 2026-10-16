@@ -19,3 +19,6 @@ Route::view('/contact', 'site.contact')->name('site.contact');
 Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointment.index');
 Route::get('/appointments/contact', [AppointmentController::class, 'contact'])->name('appointment.contact');
 Route::post('/appointments/contact', [AppointmentController::class, 'contactStore'])->name('appointment.contact.store');
+use App\Http\Controllers\CountryController;
+
+Route::resource('country', CountryController::class);
