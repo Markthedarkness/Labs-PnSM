@@ -344,6 +344,7 @@
         <a href="{{ route('site.contact') }}">Контакти</a>
         <a href="{{ route('country.index') }}">Країни</a>
         <a href="{{ route('patient.index') }}">Пацієнти</a>
+        <a href="{{ route('stats.pages') }}">Статистика</a>
     </nav>
 </header>
 
