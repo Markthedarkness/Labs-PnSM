@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\PatientController;
+use App\Http\Middleware\TrackVisit;
+use App\Http\Controllers\StatsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,9 +23,9 @@ Route::view('/contact', 'site.contact')->name('site.contact');
 Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointment.index');
 Route::get('/appointments/contact', [AppointmentController::class, 'contact'])->name('appointment.contact');
 Route::post('/appointments/contact', [AppointmentController::class, 'contactStore'])->name('appointment.contact.store');
-use App\Http\Controllers\CountryController;
 
 Route::resource('country', CountryController::class);
-use App\Http\Controllers\PatientController;
-
 Route::resource('patient', PatientController::class);
+Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
+Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
+Route::get('/stats/methods', [StatsController::class, 'methods'])->name('stats.methods');
