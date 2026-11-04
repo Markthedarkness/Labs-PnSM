@@ -327,6 +327,170 @@
             font-size: 13px;
             margin-top: 4px;
         }
+
+        /* ===== Блог: сітка карток ===== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .blog-card {
+            background-color: #ffffff;
+            border: 1px solid #e1eef8;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(11, 111, 184, 0.12);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .blog-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background-color: #e8f3fb;
+            color: #0b6fb8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .blog-card-body h2 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .blog-card-body h2 a {
+            color: #0b3a5e;
+            text-decoration: none;
+        }
+
+        .blog-card-body h2 a:hover {
+            color: #1488d8;
+        }
+
+        .blog-meta {
+            font-size: 13px;
+            color: #7a8a99;
+            margin-bottom: 12px;
+        }
+
+        .blog-card-body p {
+            color: #35485c;
+            font-size: 14px;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+
+        .blog-read-more {
+            color: #0b6fb8;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            align-self: flex-start;
+        }
+
+        .blog-read-more:hover {
+            color: #1488d8;
+            text-decoration: underline;
+        }
+
+        /* ===== Блог: сторінка перегляду ===== */
+        .blog-post {
+            color: #1f2d3d;
+        }
+
+        .blog-post header {
+            margin-bottom: 24px;
+            background-color: transparent;
+            padding: 0;
+            display: block;
+            height: auto;
+            box-shadow: none;
+        }
+
+        .blog-post header .blog-category {
+            display: inline-block;
+            background-color: #e8f3fb;
+            color: #0b6fb8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .blog-post h1 {
+            font-size: 28px;
+            color: #0b3a5e;
+            margin: 12px 0;
+        }
+
+        .blog-post .blog-meta {
+            font-size: 14px;
+            color: #7a8a99;
+            margin-bottom: 12px;
+        }
+
+        .blog-post-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .blog-lead {
+            font-size: 16px;
+            color: #35485c;
+            margin-bottom: 16px;
+        }
+
+        .blog-text {
+            color: #1f2d3d;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .blog-post hr {
+            border: none;
+            border-top: 1px solid #e1eef8;
+            margin: 24px 0;
+        }
+
+        .blog-post a {
+            color: #0b6fb8;
+            text-decoration: none;
+        }
+
+        .blog-post a:hover {
+            color: #1488d8;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -345,6 +509,7 @@
         <a href="{{ route('country.index') }}">Країни</a>
         <a href="{{ route('patient.index') }}">Пацієнти</a>
         <a href="{{ route('stats.pages') }}">Статистика</a>
+        <a href="{{ route('blog.index') }}">Блог</a>
     </nav>
 </header>
 
