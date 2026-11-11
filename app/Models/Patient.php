@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Patient extends Model
 {
     protected $fillable = [
@@ -64,5 +64,15 @@ class Patient extends Model
         $translation = $this->translation($locale);
 
         return $translation?->notes ?? $this->diagnosis;
+    }
+
+    public function doctors(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Doctor::class,
+            'doctor_patient',
+            'patient_id',
+            'doctor_id'
+        );
     }
 }

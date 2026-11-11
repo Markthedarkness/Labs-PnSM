@@ -41,3 +41,18 @@
     </select>
     @error('category_id') <p class="error">{{ $message }}</p> @enderror
 </div>
+
+<div>
+    <label for="filters">Мітки (кілька значень)</label>
+    <select id="filters" name="filters[]" multiple>
+        @foreach ($filters as $id => $name)
+            <option
+                value="{{ $id }}"
+                @selected(in_array($id, old('filters', $selected ?? [])))
+            >
+                {{ $name }}
+            </option>
+        @endforeach
+    </select>
+    @error('filters') <p class="error">{{ $message }}</p> @enderror
+</div>
