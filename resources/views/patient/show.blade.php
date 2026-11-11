@@ -37,6 +37,7 @@
     <hr>
 
     <p><a href="{{ route('patient.edit', $patient) }}">Редагувати</a></p>
+    <a href="{{ route('blog.tags', $blog) }}">Керувати мітками</a>
 
     <form method="POST" action="{{ route('patient.destroy', $patient) }}"
           onsubmit="return confirm('Видалити пацієнта?');">

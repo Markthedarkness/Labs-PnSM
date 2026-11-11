@@ -41,6 +41,16 @@
         <p>
             <a href="{{ route('blog.index') }}">← До всіх записів</a>
             <a href="{{ route('blog.edit', $blog) }}">Редагувати</a>
+            <a href="{{ route('blog.tags', $blog) }}">Керувати мітками</a>
         </p>
     </div>
+
+    @if ($blog->filters->isNotEmpty())
+        <p>
+            <strong>Мітки:</strong>
+            @foreach ($blog->filters as $filter)
+                <span class="blog-category">{{ $filter->filter_name }}</span>
+            @endforeach
+        </p>
+    @endif
 @endsection

@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'MedCare — Система управління охороною здоров\'я')</title>
 
+    @vite(['resources/css/app.css'])
+
+    {{-- Select2 CSS --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+
+    {{-- DualListBox CSS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-duallistbox/4.0.2/bootstrap-duallistbox.min.css">
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
@@ -22,7 +26,6 @@
             flex-direction: column;
         }
 
-        /* ===== ХЕДЕР ===== */
         header {
             background: linear-gradient(90deg, #0b6fb8 0%, #1488d8 100%);
             color: #fff;
@@ -34,462 +37,159 @@
             box-shadow: 0 2px 10px rgba(11, 111, 184, 0.25);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; }
         .logo-icon {
-            width: 38px;
-            height: 38px;
-            background-color: #fff;
-            color: #0b6fb8;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: 900;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+            width: 38px; height: 38px; background-color: #fff; color: #0b6fb8;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 22px; font-weight: 900; box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-            height: 70px;
-        }
-
+        nav { display: flex; align-items: center; height: 70px; }
         nav a {
-            color: #e8f3fb;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0 18px;
-            height: 70px;
-            line-height: 70px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-            border-bottom: 3px solid transparent;
+            color: #e8f3fb; text-decoration: none; font-weight: 500;
+            padding: 0 18px; height: 70px; line-height: 70px;
+            transition: background-color 0.2s ease; border-bottom: 3px solid transparent;
         }
+        nav a:hover { background-color: rgba(255,255,255,0.12); color: #fff; border-bottom-color: #7fd6a6; }
 
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            border-bottom-color: #7fd6a6;
-        }
-
-        /* ===== ОСНОВНИЙ ВМІСТ ===== */
         main {
-            flex: 1;
-            max-width: 1000px;
-            width: 100%;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(11, 111, 184, 0.08);
-            border-top: 4px solid #0b6fb8;
+            flex: 1; max-width: 1000px; width: 100%; margin: 40px auto;
+            padding: 40px; background-color: #ffffff; border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(11, 111, 184, 0.08); border-top: 4px solid #0b6fb8;
         }
-
-        main h1 {
-            color: #0b6fb8;
-            font-size: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e1eef8;
-        }
-
-        main h2 {
-            color: #1488d8;
-            font-size: 22px;
-            margin: 24px 0 12px;
-        }
-
-        main p {
-            margin-bottom: 12px;
-            color: #35485c;
-        }
-
-        main ul {
-            margin: 10px 0 18px 24px;
-            color: #35485c;
-        }
-
-        main li {
-            margin-bottom: 6px;
-        }
+        main h1 { color: #0b6fb8; font-size: 30px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #e1eef8; }
+        main h2 { color: #1488d8; font-size: 22px; margin: 24px 0 12px; }
+        main p { margin-bottom: 12px; color: #35485c; }
+        main ul { margin: 10px 0 18px 24px; color: #35485c; }
+        main li { margin-bottom: 6px; }
 
         .badge {
-            display: inline-block;
-            background-color: #e6f4ec;
-            color: #1e7a4d;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 16px;
+            display: inline-block; background-color: #e6f4ec; color: #1e7a4d;
+            padding: 4px 12px; border-radius: 20px; font-size: 13px;
+            font-weight: 600; margin-bottom: 16px;
         }
 
-        /* ===== ФУТЕР ===== */
-        footer {
-            background-color: #0b3a5e;
-            color: #b8d3e8;
-            padding: 30px 40px 20px;
-            font-size: 14px;
-        }
+        footer { background-color: #0b3a5e; color: #b8d3e8; padding: 30px 40px 20px; font-size: 14px; }
+        .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-block h4 { color: #ffffff; margin-bottom: 8px; font-size: 15px; }
+        .footer-block p, .footer-block a { color: #b8d3e8; text-decoration: none; font-size: 14px; margin-bottom: 4px; display: block; }
+        .footer-block a:hover { color: #7fd6a6; }
+        .footer-bottom { max-width: 1000px; margin: 22px auto 0; padding-top: 16px; border-top: 1px solid #1a5480; text-align: center; font-size: 13px; color: #8fb8d4; }
 
-        .footer-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-block h4 {
-            color: #ffffff;
-            margin-bottom: 8px;
-            font-size: 15px;
-            letter-spacing: 0.4px;
-        }
-
-        .footer-block p,
-        .footer-block a {
-            color: #b8d3e8;
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 4px;
-            display: block;
-        }
-
-        .footer-block a:hover {
-            color: #7fd6a6;
-        }
-
-        .footer-bottom {
-            max-width: 1000px;
-            margin: 22px auto 0;
-            padding-top: 16px;
-            border-top: 1px solid #1a5480;
-            text-align: center;
-            font-size: 13px;
-            color: #8fb8d4;
-        }
-        /* ===== Пагінація ===== */
-        nav[role="navigation"] {
-            margin-top: 24px;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav[role="navigation"] > div:first-child {
-            display: none; /* Ховаємо "Showing X to Y of Z results" */
-        }
-
-        nav[role="navigation"] > div:last-child {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
+        /* Пагінація */
+        nav[role="navigation"] { margin-top: 24px; display: flex; justify-content: center; }
+        nav[role="navigation"] > div:first-child { display: none; }
+        nav[role="navigation"] > div:last-child { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         nav[role="navigation"] a,
         nav[role="navigation"] span[aria-current="page"] > span,
         nav[role="navigation"] span[aria-disabled="true"] > span {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 36px;
-            height: 36px;
-            padding: 0 10px;
-            border: 1px solid #c9d9e6;
-            border-radius: 6px;
-            background-color: #ffffff;
-            color: #0b6fb8;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 36px; height: 36px; padding: 0 10px;
+            border: 1px solid #c9d9e6; border-radius: 6px;
+            background-color: #ffffff; color: #0b6fb8;
+            font-size: 14px; font-weight: 500; text-decoration: none;
+        }
+        nav[role="navigation"] a:hover { background-color: #e8f3fb; border-color: #1488d8; }
+        nav[role="navigation"] span[aria-current="page"] > span { background-color: #0b6fb8; color: #ffffff; border-color: #0b6fb8; }
+        nav[role="navigation"] span[aria-disabled="true"] > span { background-color: #f4f6f8; color: #a8b8c6; border-color: #e1eef8; cursor: not-allowed; }
+        nav[role="navigation"] svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* Таблиця */
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+        table thead th { text-align: left; padding: 10px 12px; background-color: #f4f9fd; color: #0b3a5e; font-weight: 600; border-bottom: 2px solid #d7e6f2; }
+        table tbody td { padding: 10px 12px; border-bottom: 1px solid #e8f0f7; color: #35485c; }
+        table tbody tr:hover { background-color: #f8fbfe; }
+        table a { color: #0b6fb8; text-decoration: none; font-weight: 500; }
+        table a:hover { text-decoration: underline; }
+
+        /* Форма */
+        form div { margin-bottom: 16px; }
+        form label { display: block; font-weight: 600; color: #1f2d3d; margin-bottom: 6px; }
+        form input[type="text"], form input[type="number"] {
+            width: 100%; max-width: 400px; padding: 9px 12px;
+            border: 1px solid #c9d9e6; border-radius: 6px;
+            font-size: 14px; font-family: inherit;
+        }
+        form input:focus { outline: none; border-color: #1488d8; box-shadow: 0 0 0 3px rgba(20,136,216,0.15); }
+        form button[type="submit"] {
+            background-color: #0b6fb8; color: #fff; border: none;
+            padding: 10px 20px; border-radius: 6px; font-size: 14px;
+            font-weight: 600; cursor: pointer;
+        }
+        form button[type="submit"]:hover { background-color: #1488d8; }
+        .error { color: #c0392b; font-size: 13px; margin-top: 4px; }
+
+        /* Блог: сітка карток */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 24px 0; }
+        .blog-card { background-color: #ffffff; border: 1px solid #e1eef8; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+        .blog-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(11,111,184,0.12); }
+        .blog-card-image { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .blog-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+        .blog-category { display: inline-block; background-color: #e8f3fb; color: #0b6fb8; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px; align-self: flex-start; }
+        .blog-card-body h2 { font-size: 18px; margin-bottom: 12px; line-height: 1.4; }
+        .blog-card-body h2 a { color: #0b3a5e; text-decoration: none; }
+        .blog-card-body h2 a:hover { color: #1488d8; }
+        .blog-meta { font-size: 13px; color: #7a8a99; margin-bottom: 12px; }
+        .blog-card-body p { color: #35485c; font-size: 14px; flex: 1; margin-bottom: 16px; }
+        .blog-read-more { color: #0b6fb8; font-weight: 600; text-decoration: none; font-size: 14px; align-self: flex-start; }
+        .blog-read-more:hover { color: #1488d8; text-decoration: underline; }
+
+        /* Блог: сторінка перегляду */
+        .blog-post header { margin-bottom: 24px; background: transparent; padding: 0; display: block; height: auto; box-shadow: none; }
+        .blog-post h1 { font-size: 28px; color: #0b3a5e; margin: 12px 0; }
+        .blog-post .blog-meta { font-size: 14px; color: #7a8a99; margin-bottom: 12px; }
+        .blog-post-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; margin: 20px 0; }
+        .blog-lead { font-size: 16px; color: #35485c; margin-bottom: 16px; }
+        .blog-text { color: #1f2d3d; line-height: 1.7; margin-bottom: 24px; }
+        .blog-post hr { border: none; border-top: 1px solid #e1eef8; margin: 24px 0; }
+        .blog-post a { color: #0b6fb8; text-decoration: none; }
+        .blog-post a:hover { color: #1488d8; text-decoration: underline; }
+
+        /* DualListBox */
+        .bootstrap-duallistbox-container { display: flex; gap: 20px; max-width: 900px; margin: 16px 0; }
+        .bootstrap-duallistbox-container .box1,
+        .bootstrap-duallistbox-container .box2 { flex: 1; min-width: 0; }
+        .bootstrap-duallistbox-container select { width: 100%; height: 250px; border: 1px solid #c9d9e6; border-radius: 6px; padding: 8px; }
+        .bootstrap-duallistbox-container .btn-group { display: flex; gap: 4px; margin: 8px 0; }
+        .bootstrap-duallistbox-container .btn { padding: 6px 12px; background-color: #0b6fb8; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .bootstrap-duallistbox-container .btn:hover { background-color: #1488d8; }
+        .bootstrap-duallistbox-container .info { font-size: 13px; color: #7a8a99; margin-top: 6px; }
+        .bootstrap-duallistbox-container input.filter { width: 100%; padding: 8px 10px; border: 1px solid #c9d9e6; border-radius: 6px; margin-bottom: 8px; }
+
+        /* ===== Фільтри блогу ===== */
+        .blog-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 24px 0;
+            padding: 16px;
+            background-color: #f4f9fd;
+            border-radius: 8px;
+            border: 1px solid #e1eef8;
         }
 
-        nav[role="navigation"] a:hover {
+        .blog-filters a {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #ffffff;
+            color: #0b6fb8;
+            border: 1px solid #c9d9e6;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .blog-filters a:hover {
             background-color: #e8f3fb;
             border-color: #1488d8;
         }
 
-        nav[role="navigation"] span[aria-current="page"] > span {
+        .blog-filters a.active {
             background-color: #0b6fb8;
             color: #ffffff;
             border-color: #0b6fb8;
-            font-weight: 600;
-        }
-
-        nav[role="navigation"] span[aria-disabled="true"] > span {
-            background-color: #f4f6f8;
-            color: #a8b8c6;
-            border-color: #e1eef8;
-            cursor: not-allowed;
-        }
-
-        nav[role="navigation"] svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        /* ===== Таблиця ===== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 16px;
-            font-size: 14px;
-        }
-
-        table thead th {
-            text-align: left;
-            padding: 10px 12px;
-            background-color: #f4f9fd;
-            color: #0b3a5e;
-            font-weight: 600;
-            border-bottom: 2px solid #d7e6f2;
-        }
-
-        table tbody td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #e8f0f7;
-            color: #35485c;
-        }
-
-        table tbody tr:hover {
-            background-color: #f8fbfe;
-        }
-
-        table a {
-            color: #0b6fb8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        table a:hover {
-            text-decoration: underline;
-        }
-
-        /* ===== Форма ===== */
-        form div {
-            margin-bottom: 16px;
-        }
-
-        form label {
-            display: block;
-            font-weight: 600;
-            color: #1f2d3d;
-            margin-bottom: 6px;
-        }
-
-        form input[type="text"],
-        form input[type="number"] {
-            width: 100%;
-            max-width: 400px;
-            padding: 9px 12px;
-            border: 1px solid #c9d9e6;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: inherit;
-        }
-
-        form input:focus {
-            outline: none;
-            border-color: #1488d8;
-            box-shadow: 0 0 0 3px rgba(20, 136, 216, 0.15);
-        }
-
-        form button[type="submit"] {
-            background-color: #0b6fb8;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        form button[type="submit"]:hover {
-            background-color: #1488d8;
-        }
-
-        .error {
-            color: #c0392b;
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        /* ===== Блог: сітка карток ===== */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin: 24px 0;
-        }
-
-        .blog-card {
-            background-color: #ffffff;
-            border: 1px solid #e1eef8;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(11, 111, 184, 0.12);
-        }
-
-        .blog-card-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .blog-card-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .blog-category {
-            display: inline-block;
-            background-color: #e8f3fb;
-            color: #0b6fb8;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            align-self: flex-start;
-        }
-
-        .blog-card-body h2 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .blog-card-body h2 a {
-            color: #0b3a5e;
-            text-decoration: none;
-        }
-
-        .blog-card-body h2 a:hover {
-            color: #1488d8;
-        }
-
-        .blog-meta {
-            font-size: 13px;
-            color: #7a8a99;
-            margin-bottom: 12px;
-        }
-
-        .blog-card-body p {
-            color: #35485c;
-            font-size: 14px;
-            flex: 1;
-            margin-bottom: 16px;
-        }
-
-        .blog-read-more {
-            color: #0b6fb8;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-            align-self: flex-start;
-        }
-
-        .blog-read-more:hover {
-            color: #1488d8;
-            text-decoration: underline;
-        }
-
-        /* ===== Блог: сторінка перегляду ===== */
-        .blog-post {
-            color: #1f2d3d;
-        }
-
-        .blog-post header {
-            margin-bottom: 24px;
-            background-color: transparent;
-            padding: 0;
-            display: block;
-            height: auto;
-            box-shadow: none;
-        }
-
-        .blog-post header .blog-category {
-            display: inline-block;
-            background-color: #e8f3fb;
-            color: #0b6fb8;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            align-self: flex-start;
-        }
-
-        .blog-post h1 {
-            font-size: 28px;
-            color: #0b3a5e;
-            margin: 12px 0;
-        }
-
-        .blog-post .blog-meta {
-            font-size: 14px;
-            color: #7a8a99;
-            margin-bottom: 12px;
-        }
-
-        .blog-post-image {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .blog-lead {
-            font-size: 16px;
-            color: #35485c;
-            margin-bottom: 16px;
-        }
-
-        .blog-text {
-            color: #1f2d3d;
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .blog-post hr {
-            border: none;
-            border-top: 1px solid #e1eef8;
-            margin: 24px 0;
-        }
-
-        .blog-post a {
-            color: #0b6fb8;
-            text-decoration: none;
-        }
-
-        .blog-post a:hover {
-            color: #1488d8;
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -540,6 +240,56 @@
         &copy; {{ date('Y') }} MedCare — КПІ ім. Ігоря Сікорського. Усі права захищено.
     </div>
 </footer>
+
+{{-- 1. jQuery (завжди перший) --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+{{-- 2. Select2 --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+{{-- 3. DualListBox --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-duallistbox/4.0.2/jquery.bootstrap-duallistbox.min.js"></script>
+
+{{-- 4. Ініціалізація --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.jQuery) {
+            if (jQuery('#filters').length) {
+                jQuery('#filters').select2({
+                    width: '100%',
+                    placeholder: 'Оберіть мітки',
+                    allowClear: true,
+                });
+            }
+
+            if (jQuery('#duallist').length && typeof jQuery.fn.bootstrapDualListbox === 'function') {
+                jQuery('#duallist').bootstrapDualListbox({
+                    nonSelectedListLabel: 'Доступні мітки',
+                    selectedListLabel: 'Обрані мітки',
+                    preserveSelectionOnMove: 'moved',
+                    moveOnSelect: false,
+                    infoText: 'Усього {0}',
+                    filterPlaceHolder: 'Пошук',
+                });
+            }
+        }
+    });
+</script>
+
+<script>
+    // Синхронізація DualListBox перед сабмітом
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('tags-form');
+        if (form) {
+            form.addEventListener('submit', function () {
+                if (window.jQuery && jQuery.fn.bootstrapDualListbox) {
+                    // Примусово оновлюємо вибір у <select>
+                    jQuery('#duallist').bootstrapDualListbox('refresh', true);
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
