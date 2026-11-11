@@ -27,6 +27,8 @@ class PatientRequest extends FormRequest
             ],
             'diagnosis' => ['nullable', 'string', 'max:255'],
             'gender' => ['required', Rule::in(['M', 'F'])],
+            'doctors' => ['sometimes', 'array'],
+            'doctors.*' => ['integer', 'distinct', 'exists:doctors,id'],
         ];
     }
 

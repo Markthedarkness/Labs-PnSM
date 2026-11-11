@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PatientRequest;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use App\Models\Doctor;
 
 class PatientController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Patient::query();
+        $query = Patient::query()->withCount('doctors');
 
         // Фільтрація за статтю
         if ($request->filled('gender')) {
@@ -32,7 +33,10 @@ class PatientController extends Controller
 
     public function create()
     {
-        return view('patient.create');
+        return view('patient.create', [
+            'doctors' => Doctor::orderBy('name')->pluck('name', 'id'),
+            'selectedDoctors' => [],
+        ]);
     }
 
     public function store(PatientRequest $request)
@@ -50,12 +54,21 @@ class PatientController extends Controller
 
     public function edit(Patient $patient)
     {
-        return view('patient.edit', compact('patient'));
+        $patient->load('doctors');
+
+        return view('patient.edit', [
+            'patient' => $patient,
+            'doctors' => Doctor::orderBy('name')->pluck('name', 'id'),
+            'selectedDoctors' => $patient->doctors->pluck('id')->all(),
+        ]);
     }
 
     public function update(PatientRequest $request, Patient $patient)
     {
-        $patient->update($request->validated());
+        $data = $request->validated();
+
+        $patient->update(\Illuminate\Support\Arr::except($data, ['doctors']));
+        $patient->doctors()->sync($data['doctors'] ?? []);
 
         return redirect()->route('patient.index')
             ->with('success', 'Дані пацієнта оновлено.');

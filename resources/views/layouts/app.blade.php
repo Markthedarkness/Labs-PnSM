@@ -274,6 +274,14 @@
             }
         }
     });
+
+    if (jQuery('#doctors').length) {
+        jQuery('#doctors').select2({
+            width: '100%',
+            placeholder: 'Оберіть лікарів',
+            allowClear: true,
+        });
+    }
 </script>
 
 <script>

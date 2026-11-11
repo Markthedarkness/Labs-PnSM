@@ -27,6 +27,14 @@
     <h2>
         @if ($lang === 'en') Diagnosis @else Діагноз @endif
     </h2>
+    @if ($patient->doctors->isNotEmpty())
+        <p>
+            <strong>Лікарі:</strong>
+            @foreach ($patient->doctors as $doctor)
+                <span class="blog-category">{{ $doctor->name }} ({{ $doctor->specialty }})</span>
+            @endforeach
+        </p>
+    @endif
     <p>{{ $patient->translated_diagnosis }}</p>
 
     <h2>
@@ -37,7 +45,6 @@
     <hr>
 
     <p><a href="{{ route('patient.edit', $patient) }}">Редагувати</a></p>
-    <a href="{{ route('blog.tags', $blog) }}">Керувати мітками</a>
 
     <form method="POST" action="{{ route('patient.destroy', $patient) }}"
           onsubmit="return confirm('Видалити пацієнта?');">

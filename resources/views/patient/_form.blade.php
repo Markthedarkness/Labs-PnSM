@@ -49,3 +49,15 @@
            value="{{ old('diagnosis', $patient->diagnosis ?? '') }}">
     @error('diagnosis') <p class="error">{{ $message }}</p> @enderror
 </div>
+
+<div>
+    <label for="doctors">Лікарі, які ведуть пацієнта</label>
+    <select id="doctors" name="doctors[]" multiple>
+        @foreach ($doctors as $id => $name)
+            <option value="{{ $id }}" @selected(in_array($id, old('doctors', $selectedDoctors ?? [])))>
+                {{ $name }}
+            </option>
+        @endforeach
+    </select>
+    @error('doctors') <p class="error">{{ $message }}</p> @enderror
+</div>
