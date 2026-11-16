@@ -36,6 +36,7 @@
             <th>Стать</th>
             <th>Телефон</th>
             <th>Дії</th>
+            <th>Лікарів</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
                 <td>{{ $patient->age }}</td>
                 <td>{{ $patient->gender === 'M' ? 'Ч' : 'Ж' }}</td>
                 <td>{{ $patient->phone }}</td>
+                <td>{{ $patient->doctors_count }}</td>
                 <td>
                     <a href="{{ route('patient.edit', $patient) }}">Редагувати</a>
                 </td>
