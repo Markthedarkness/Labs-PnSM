@@ -6,29 +6,27 @@ use App\Http\Requests\PatientRequest;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Queries\PatientFilter;
 
 class PatientController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, PatientFilter $filter)
     {
-        $query = Patient::query()->withCount('doctors');
+        $input = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+            'gender' => ['nullable', 'in:M,F'],
+            'doctor_id' => ['nullable', 'integer', 'exists:doctors,id'],
+            'diagnosis' => ['nullable', 'string', 'max:255'],
+            'sort' => ['nullable', 'string', 'max:30'],
+        ]);
 
-        // Фільтрація за статтю
-        if ($request->filled('gender')) {
-            $query->where('gender', $request->input('gender'));
-        }
-
-        // Пошук за прізвищем
-        if ($request->filled('search')) {
-            $query->where('last_name', 'like', '%' . $request->input('search') . '%');
-        }
-
-        $patients = $query
-            ->orderBy('last_name')
+        $patients = $filter->apply($input)
             ->paginate(5)
-            ->withQueryString(); // зберігає фільтри при пагінації
+            ->withQueryString();
 
-        return view('patient.index', compact('patients'));
+        $doctors = Doctor::orderBy('name')->pluck('name', 'id');
+
+        return view('patient.index', compact('patients', 'doctors'));
     }
 
     public function create()

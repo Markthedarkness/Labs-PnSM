@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Filter;
+use App\Queries\BlogFilter;
 
 class BlogController extends Controller
 {
@@ -36,29 +37,25 @@ class BlogController extends Controller
         return view('blog.index', compact('blogs', 'filters', 'filterId'));
     }
 
-    public function admin(Request $request)
+    public function admin(Request $request, BlogFilter $filter)
     {
-        $query = Blog::with('category');
+        $input = $request->validate([
+            'title' => ['nullable', 'string', 'max:200'],
+            'categoryName' => ['nullable', 'string', 'max:100'],
+            'category_id' => ['nullable', 'integer', 'exists:category,category_id'],
+            'filter_id' => ['nullable', 'integer', 'exists:filter,filter_id'],
+            'sort' => ['nullable', 'string', 'max:30'],
+        ]);
 
-        // Пошук за заголовком
-        if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->input('search') . '%');
-        }
-
-        // Фільтр за категорією
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->input('category_id'));
-        }
-
-        $blogs = $query
-            ->orderByDesc('dt_created')
+        $blogs = $filter->apply($input)
             ->paginate(10)
             ->withQueryString();
 
-        $categories = Category::orderBy('category_name')
-            ->pluck('category_name', 'category_id');
-
-        return view('blog.admin', compact('blogs', 'categories'));
+        return view('blog.admin', [
+            'blogs' => $blogs,
+            'categories' => Category::orderBy('category_name')->pluck('category_name', 'category_id'),
+            'filters' => Filter::orderBy('filter_name')->pluck('filter_name', 'filter_id'),
+        ]);
     }
 
     public function create()
