@@ -191,6 +191,86 @@
             color: #ffffff;
             border-color: #0b6fb8;
         }
+        .tag {
+            display: inline-block;
+            background-color: #e8f3fb;
+            color: #0b6fb8;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 4px;
+        }
+        .filter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: flex-end;
+            margin: 20px 0;
+            padding: 16px;
+            background-color: #f4f9fd;
+            border: 1px solid #e1eef8;
+            border-radius: 8px;
+        }
+
+        .filter-form .filter-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .filter-form label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f2d3d;
+        }
+
+        .filter-form input,
+        .filter-form select {
+            padding: 8px 10px;
+            border: 1px solid #c9d9e6;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 180px;
+        }
+
+        .filter-form button {
+            background-color: #0b6fb8;
+            color: #fff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .filter-form button:hover {
+            background-color: #1488d8;
+        }
+
+        .filter-form a {
+            color: #0b6fb8;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 9px 0;
+        }
+
+        .filter-form a:hover {
+            text-decoration: underline;
+        }
+
+        /* Сортування в заголовках */
+        table thead th a {
+            color: #0b3a5e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        table thead th a:hover {
+            color: #1488d8;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
