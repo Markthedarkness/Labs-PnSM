@@ -290,6 +290,19 @@
         <a href="{{ route('patient.index') }}">Пацієнти</a>
         <a href="{{ route('stats.pages') }}">Статистика</a>
         <a href="{{ route('blog.index') }}">Блог</a>
+
+        @auth
+            <a href="{{ route('dashboard') }}">Панель керування</a>
+            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                @csrf
+                <button type="submit" style="background:none; border:none; color:#e8f3fb; cursor:pointer; padding:0 18px; height:70px; line-height:70px; font-family:inherit; font-size:inherit;">
+                    Вийти ({{ auth()->user()->name }})
+                </button>
+            </form>
+        @else
+            <a href="{{ route('login') }}">Увійти</a>
+            <a href="{{ route('register') }}">Реєстрація</a>
+        @endauth
     </nav>
 </header>
 
