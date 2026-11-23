@@ -271,6 +271,95 @@
             color: #1488d8;
             text-decoration: underline;
         }
+        /* ===== Профіль (Breeze) ===== */
+        .profile-section {
+            background-color: #f9fbfd;
+            border: 1px solid #e1eef8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .profile-section h2 {
+            color: #0b6fb8;
+            font-size: 18px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e1eef8;
+        }
+
+        .profile-section p {
+            color: #35485c;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .profile-section button[type="submit"] {
+            background-color: #0b6fb8;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .profile-section button[type="submit"]:hover {
+            background-color: #1488d8;
+        }
+
+        .profile-section .danger-button {
+            background-color: #c0392b;
+        }
+
+        .profile-section .danger-button:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Перекриваємо Breeze-стилі */
+        .bg-gray-100 { background-color: transparent !important; }
+        .bg-white { background-color: transparent !important; }
+
+        /* ===== Прибираємо сині смуги Breeze ===== */
+        .profile-section section > header {
+            background: transparent !important;
+            background-color: transparent !important;
+            padding: 0 !important;
+            margin-bottom: 16px !important;
+        }
+
+        .profile-section section > header h2 {
+            background: transparent !important;
+            background-color: transparent !important;
+            color: #0b6fb8 !important;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            padding: 0 !important;
+            margin: 0 0 8px 0 !important;
+            text-decoration: none !important;
+        }
+
+        .profile-section section > header p {
+            background: transparent !important;
+            background-color: transparent !important;
+            color: #35485c !important;
+            font-size: 14px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* Прибираємо всі сірі/сині блоки Breeze в профілі */
+        .profile-section .bg-gray-100,
+        .profile-section .bg-white,
+        .profile-section .bg-gray-50 {
+            background-color: transparent !important;
+        }
+
+        /* Заголовок секції — прибираємо підкреслення */
+        .profile-section h2 {
+            text-decoration: none !important;
+            border: none !important;
+        }
     </style>
 </head>
 <body>
